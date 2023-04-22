@@ -10,7 +10,7 @@ cursor.execute(
     ''' CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT NOT NULL)  ''')
 conn.commit()
 
-bot = Bot(token='6188787794:AAFj5a0fZqRmIN8Y_I6y5xiDr03ziiPRK5Q')
+bot = Bot(token='YOUR TOKEN')
 dp = Dispatcher(bot)
 
 

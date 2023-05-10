@@ -10,11 +10,22 @@ dp = Dispatcher(bot)
 keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
 keyboard.add(KeyboardButton('Open Youtube'))
 keyboard.add(KeyboardButton('Send image'))
+keyboard.add(KeyboardButton('Send location', request_location=True))
 
 
 @dp.message_handler(commands=['start'])
 async def send_keyboard(message: types.Message):
     await message.answer('Choose operation: ', reply_markup=keyboard)
+    
+@dp.message_handler(commands=['location'])
+async def send_location_keyboard(message: Message):
+    await message.answer('Нажмите на кнопку "Send location", чтобы отправить свою геолокацию:', reply_markup=keyboard)
+
+@dp.message_handler(content_types=['location'])
+async def handle_location(message: Message):
+    latitude = message.location.latitude
+    longitude = message.location.longitude
+    await message.answer(f'Ваше местоположение: {latitude}, {longitude}', reply_markup=ReplyKeyboardRemove())
 
 
 @dp.message_handler(text='Open Youtube')
